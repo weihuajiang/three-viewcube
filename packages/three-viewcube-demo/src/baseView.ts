@@ -152,6 +152,7 @@ export class BaseViewer {
 
   protected createSimpleCameraControls() {
     const simpleCameraControls = new SimpleCameraControls(this.camera)
+    // @ts-expect-error No good way to fix this type error
     simpleCameraControls.setControls(this.cameraControls)
     return simpleCameraControls
   }

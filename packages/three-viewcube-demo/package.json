@@ -25,12 +25,12 @@
     "lint": "pnpm eslint -c ../../.eslintrc.js --ext .ts,.js,.vue --quiet src/"
   },
   "devDependencies": {
-    "@types/three": "^0.166.0"
+    "@types/three": "^0.172.0"
   },
   "dependencies": {
-    "@mlightcad/three-viewcube": "^0.0.6",
+    "@mlightcad/three-viewcube": "^0.0.8",
     "@tweenjs/tween.js": "^25.0.0",
     "lil-gui": "^0.19.2",
-    "three": "^0.166.1"
+    "three": "^0.172.0"
   }
 }
