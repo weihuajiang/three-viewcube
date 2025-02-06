@@ -37,6 +37,10 @@ export interface ViewCubeOptions {
    * Text in each face of view cube
    */
   faceNames?: FaceNames
+  /**
+   * Font size of the faceNames
+   */
+  fontSize?: number
 }
 
 /**
@@ -48,7 +52,8 @@ export const DEFAULT_VIEWCUBE_OPTIONS: ViewCubeOptions = {
   faceColor: MAIN_COLOR,
   hoverColor: HOVER_COLOR,
   outlineColor: OUTLINE_COLOR,
-  faceNames: DEFAULT_FACENAMES
+  faceNames: DEFAULT_FACENAMES,
+  fontSize: 60,
 }
 
 export interface ViewCubeEvent extends THREE.Object3DEventMap {
@@ -84,7 +89,8 @@ export class ViewCubeGizmo extends FixedPosGizmo<ViewCubeEvent> {
       true,
       mergedOptions.faceColor,
       mergedOptions.outlineColor,
-      mergedOptions.faceNames
+      mergedOptions.faceNames,
+      mergedOptions.fontSize,
     )
     this.add(this.cube)
 

@@ -25,6 +25,7 @@ export class ViewCube extends THREE.Object3D {
    * @param faceColor Face color of view cube
    * @param outlineColor Edge color of view cube
    * @param faceNames Texts in each face of view cube
+   * @param fontSize Font size of the faceNames
    */
   constructor(
     cubeSize: number = 60,
@@ -32,7 +33,8 @@ export class ViewCube extends THREE.Object3D {
     isShowOutline: boolean = true,
     faceColor: number = 0xcccccc,
     outlineColor: number = 0x999999,
-    faceNames: FaceNames = DEFAULT_FACENAMES
+    faceNames: FaceNames = DEFAULT_FACENAMES,
+    fontSize: number = 60,
   ) {
     super()
     this._cubeSize = cubeSize
@@ -40,7 +42,7 @@ export class ViewCube extends THREE.Object3D {
     this._isShowOutline = isShowOutline
     this._faceColor = faceColor
     this._outlineColor = outlineColor
-    this.build(faceNames)
+    this.build(faceNames, fontSize)
   }
 
   /**
@@ -58,14 +60,14 @@ export class ViewCube extends THREE.Object3D {
     })
   }
 
-  private build(faceNames: FaceNames) {
+  private build(faceNames: FaceNames, fontSize: number = 60) {
     const faceSize = this._cubeSize - this._borderSize * 2
     const faceOffset = this._cubeSize / 2
     const borderSize = this._borderSize
 
     /* faces: front, right, back, left, top, bottom */
     const cubeFaces = this.createCubeFaces(faceSize, faceOffset)
-    const faceMaterials = createFaceMaterials(faceNames)
+    const faceMaterials = createFaceMaterials(faceNames, fontSize)
     for (const [i, props] of faceMaterials.entries()) {
       const face = cubeFaces.children[i] as THREE.Mesh
       const material = face.material as THREE.MeshBasicMaterial
