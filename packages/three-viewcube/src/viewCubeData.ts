@@ -58,47 +58,47 @@ export function createTextSprite(text: string) {
   return new THREE.Sprite(material)
 }
 
-export function createFaceMaterials(faceNames: FaceNames = DEFAULT_FACENAMES) {
+export function createFaceMaterials(faceNames: FaceNames = DEFAULT_FACENAMES, fontSize: number = 60) {
   const materials = [
     {
       name: FACES.FRONT,
       map: createTextTexture(faceNames.front, {
-        fontSize: 60,
+        fontSize: fontSize,
         font: 'Arial Narrow, sans-serif'
       })
     },
     {
       name: FACES.RIGHT,
       map: createTextTexture(faceNames.right, {
-        fontSize: 60,
+        fontSize: fontSize,
         font: 'Arial Narrow, sans-serif'
       })
     },
     {
       name: FACES.BACK,
       map: createTextTexture(faceNames.back, {
-        fontSize: 60,
+        fontSize: fontSize,
         font: 'Arial Narrow, sans-serif'
       })
     },
     {
       name: FACES.LEFT,
       map: createTextTexture(faceNames.left, {
-        fontSize: 60,
+        fontSize: fontSize,
         font: 'Arial Narrow, sans-serif'
       })
     },
     {
       name: FACES.TOP,
       map: createTextTexture(faceNames.top, {
-        fontSize: 60,
+        fontSize: fontSize,
         font: 'Arial Narrow, sans-serif'
       })
     },
     {
       name: FACES.BOTTOM,
       map: createTextTexture(faceNames.bottom, {
-        fontSize: 60,
+        fontSize: fontSize,
         font: 'Arial Narrow, sans-serif'
       })
     }

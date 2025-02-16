@@ -93,6 +93,10 @@ export interface ViewCubeOptions {
    * Text in each face of view cube
    */
   faceNames?: FaceNames
+  /**
+   * Font size of the faceNames
+   */
+  fontSize?: number
 }
 
 ```
