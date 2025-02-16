@@ -35,16 +35,18 @@
     "import": "./dist/viewcube.js",
     "require": "./dist/viewcube.umd.cjs"
   },
-  "scripts": {
+  "scripts": {    
+    "dev": "vite",
     "clean": "rimraf dist lib tsconfig.tsbuildinfo",
     "build": "tsc && vite build",
     "lint": "pnpm eslint -c ../../.eslintrc.js --ext .ts,.js,.vue --quiet src/"
   },
   "devDependencies": {
-    "@types/three": "^0.172.0",
+    "@types/rollup-plugin-peer-deps-external": "^2.2.5",
+    "@types/three": "^0.173.0",
     "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "peerDependencies": {
-    "three": "^0.172.0"
+    "three": "^0.173.0"
   }
 }

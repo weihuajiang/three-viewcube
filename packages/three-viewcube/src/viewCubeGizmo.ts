@@ -52,7 +52,7 @@ export const DEFAULT_VIEWCUBE_OPTIONS: ViewCubeOptions = {
 }
 
 export interface ViewCubeEvent extends THREE.Object3DEventMap {
-  change: { quaternion: THREE.Quaternion }
+  change: { quaternion?: THREE.Quaternion }
 }
 
 /**
@@ -148,32 +148,50 @@ export class ViewCubeGizmo extends FixedPosGizmo<ViewCubeEvent> {
     }
   }
 
+  private lastCheckSide='';
   private checkSideOver(x: number, y: number) {
+    let selected='';
     const raycaster = new THREE.Raycaster()
     raycaster.setFromCamera(new THREE.Vector2(x, y), this.gizmoCamera)
     const intersects = raycaster.intersectObjects(this.cube.children, true)
-    // unhover
-    this.cube.traverse(function (obj) {
-      if (obj.name) {
-        const mesh = obj as THREE.Mesh
-        ;(mesh.material as THREE.MeshBasicMaterial).color.setHex(MAIN_COLOR)
-      }
-    })
+    const scope=this;
     // check hover
     if (intersects.length) {
       for (const { object } of intersects) {
         if (object.name) {
           object.parent!.children.forEach(function (child) {
-            if (child.name === object.name) {
-              const mesh = child as THREE.Mesh
-              ;(mesh.material as THREE.MeshBasicMaterial).color.setHex(
-                HOVER_COLOR
-              )
+            if (child.name === object.name){
+              selected=object.name;
+              return;
             }
-          })
-          break
+          });
         }
       }
+    }
+    if(selected!=this.lastCheckSide){
+      if(this.lastCheckSide!=''){
+        // unhover
+        this.cube.traverse(function (obj) {
+          if (obj.name==scope.lastCheckSide) {
+            const mesh = obj as THREE.Mesh
+            ;(mesh.material as THREE.MeshBasicMaterial).color.setHex(MAIN_COLOR)
+          }
+        });
+      }
+      if(selected!=''){
+        //hover
+        this.cube.traverse(function (obj) {
+          if (obj.name==selected) {
+            const mesh = obj as THREE.Mesh
+            ;(mesh.material as THREE.MeshBasicMaterial).color.setHex(HOVER_COLOR)
+          }
+        });
+      }
+      this.lastCheckSide=selected;
+      this.dispatchEvent({
+        type: 'change',
+        quaternion: undefined
+      })
     }
   }
 

@@ -53,7 +53,9 @@ If you want to rotate the current view after clicked face, edge, or corner of vi
 
 ```javascript
 viewCubeGizmo.addEventListener('change', event => {
+  if(event.quaternion){
   // TODO: Add you own logic to rotate the view
+  }
 })
 ```
 
